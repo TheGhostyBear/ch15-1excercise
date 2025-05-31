@@ -96,6 +96,13 @@ section {
 /* the styles for the aside */
 aside {
 	padding-right: .5em;
+	& img {
+		transition: transform 2s;
+	}
+	& img:hover {
+		transform: translateX(30px) rotate(180deg);
+		transform-origin: right;
+	}
 }
 
 /* the styles for the footer */
@@ -123,10 +130,21 @@ footer {
 	}
 	& p {
 		padding: .5em 0; 
-	}	
+	}
+	& img {
+		animation: pulse 2s ease-in-out infinite alternate;
+	}
 }
 .large {
 	font-size: 125%;
+}
+
+/* keyframes for pulse animation */
+@keyframes pulse {
+	to {
+		filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5)) brightness(125%);
+		transform: scale(1.1);
+	}
 }
 
 /* styles for the menu */
@@ -150,8 +168,7 @@ footer {
 	}
 	& a:link, a:visited { 
 		color: var(--light_menu);
-	}
-	& a:hover, a:focus, a.current {
+	}	& a:hover, a:focus, a:not([href]) {
 		background-color: var(--mid_menu);
 		color: var(--dark_menu);
 	}
@@ -263,5 +280,19 @@ footer {
 			float: left;
 			margin: .75em 1em;
 		}
+	}
+}
+
+/* media query for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.speaker img {
+		animation: none;
+	}
+	aside img {
+		transition: none;
+		transform: none;
+	}
+	aside img:hover {
+		transform: none;
 	}
 }
